@@ -1,0 +1,7 @@
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.pdb
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\LeapCSharp.NET4.5.dll
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csprojResolveAssemblyReference.cache
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csproj.CoreCompileInputs.cache
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.pdb
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.exe
+C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.exe
