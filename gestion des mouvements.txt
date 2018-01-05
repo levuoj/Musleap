@@ -1,0 +1,7 @@
+play (tout le temps)
+pause (poings fermés)
+stop (clap)
+volume haut/bas (index hauteur)
+mute (paumes vers le haut)
+musique suivante (pincement droite)
+musique précédente (pincement gauche)

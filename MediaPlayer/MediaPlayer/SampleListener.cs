@@ -11,7 +11,7 @@ namespace MediaPlayer
     {
         public void OnServiceConnect(object sender, ConnectionEventArgs args)
         {
-            Console.WriteLine("Srvice Connected");
+            Console.WriteLine("Service Connected");
         }
 
         public void OnConnect(object sender, DeviceEventArgs args)
@@ -22,11 +22,9 @@ namespace MediaPlayer
         public void OnFrame(object sender, FrameEventArgs args)
         {
             Frame frame = args.frame;
-            
-            //Console.WriteLine("frame id: {0}, timestam: {1}, finders: {2}", frame.Id, frame.Timestamp, frame.Hands.Count);               
-
             int extendedfingers = 0;
             bool pause = false;
+            int stop = 0;
 
             foreach (Hand hand in frame.Hands)
             {               
@@ -42,23 +40,26 @@ namespace MediaPlayer
                     if (extendedfingers == 0)
                         pause = true;
 
-                    if (hand.Fingers[4].IsExtended && hand.Fingers[1].IsExtended
-                        && hand.Fingers[2].IsExtended == false && hand.Fingers[0].IsExtended == false)
-                        Console.WriteLine("spiderman");
+                    if (hand.Fingers[0].IsExtended == false && hand.Fingers[1].IsExtended
+                        && hand.Fingers[2].IsExtended == false && hand.Fingers[3].IsExtended == false
+                        && hand.Fingers[4].IsExtended == false)
+                    {
+                        Console.WriteLine("Volume sound");
+                        //valeur à envoyer pour gérer le son
+                        //hand.Fingers[1].StabilizedTipPosition.y
+                    }
+                   
+                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9)
+                        Console.WriteLine("previous track");
 
-                    if (hand.PinchStrength > 0.9)
-                        Console.WriteLine("pinch gauche");
-                    
-                    //Console.WriteLine(hand.PalmWidth);
+                    if (hand.Rotation.w < 0.1)
+                        Console.WriteLine("mute");
 
-                    //Console.WriteLine("  Hand id: {0}, palm position: {1}, fingers: {2}", hand.Id, hand.PalmPosition, hand.Fingers.Count);
-                    //Vector normal = hand.PalmNormal;
-                    //Vector direction = hand.Direction;
 
-                    //Console.WriteLine("  Hand pitch: {0} degrees, roll: {1} degrees, yaw: {2} degrees",
-                    //    direction.Pitch * 180.0f / (float)Math.PI, normal.Roll * 180.0f / (float)Math.PI, direction.Yaw * 180.0f / (float)Math.PI);
-
+                    if (hand.Rotation.w < 0.70)
+                        ++stop;
                 }
+
                 else if (hand.IsRight)
                 {
                     for (int f = 0; f < hand.Fingers.Count; ++f)
@@ -70,22 +71,38 @@ namespace MediaPlayer
                     if (extendedfingers == 0)
                         pause = true;
 
-                    if (hand.PinchStrength > 0.9)
-                        Console.WriteLine("pinch droite");
-                    //Console.WriteLine("right : " + extendedfingers);
+                    if (hand.Fingers[0].IsExtended == false && hand.Fingers[1].IsExtended
+                        && hand.Fingers[2].IsExtended == false && hand.Fingers[3].IsExtended == false
+                        && hand.Fingers[4].IsExtended == false)
+                    {
+                        Console.WriteLine("Volume sound");
+                        //valeur à envoyer pour gérer le son
+                        //hand.Fingers[1].StabilizedTipPosition.y
+                    }
 
-                    //Console.WriteLine(hand.PinchDistance);
-                    //console.writeline(hand.pinchstrength);
+                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9)
+                            Console.WriteLine("next track");
 
+                    if (hand.Rotation.w < 0.1)
+                        Console.WriteLine("mute");
+
+                    if (hand.Rotation.w < 0.70)
+                        ++stop;
                 }                
             }
+            if (stop == 2)
+            {
+                if (frame.Hands[0].PalmPosition.DistanceTo(frame.Hands[1].PalmPosition) < 20)
+                    Console.WriteLine("stop");
+            }
+            else
+            {
+                if (pause == true && extendedfingers == 0)
+                    Console.WriteLine("pause");
+                else if (frame.Hands.Count == 2)
+                    Console.WriteLine("play");
+            }
 
-                
-            //if (pause == true && extendedfingers == 0)
-            //    Console.WriteLine("Pause");
-            //else
-            //    Console.WriteLine("Play");
-    
         }
     }
 }
