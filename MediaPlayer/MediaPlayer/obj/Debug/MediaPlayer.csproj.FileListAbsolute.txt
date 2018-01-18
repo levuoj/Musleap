@@ -5,3 +5,16 @@ C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPl
 C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.pdb
 C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.exe
 C:\Users\53324\Desktop\epitech\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.exe
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.exe
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\MediaPlayer.pdb
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csprojResolveAssemblyReference.cache
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csproj.CoreCompileInputs.cache
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.exe
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.pdb
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\Interop.WMPLib.dll
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csproj.ResolveComReference.cache
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.InterfaceMediaPlayer.resources
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\obj\Debug\MediaPlayer.csproj.GenerateResource.Cache
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\Interop.WMPLib.dll
+C:\Users\53495\Desktop\Hub\MusLeap\MediaPlayer\MediaPlayer\bin\Debug\AxInterop.WMPLib.dll
