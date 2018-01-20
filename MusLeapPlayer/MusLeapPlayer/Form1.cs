@@ -17,6 +17,7 @@ namespace MusLeapPlayer
         public Form1()
         {
             InitializeComponent();
+            this.Text = "MusLeap";
         }
         
         private void button1_Click(object sender, EventArgs e)

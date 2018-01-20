@@ -49,15 +49,12 @@
             this.LeapMotion.Name = "LeapMotion";
             this.LeapMotion.Size = new System.Drawing.Size(193, 85);
             this.LeapMotion.TabIndex = 0;
-            this.LeapMotion.Text = "LeapMotion";
             this.LeapMotion.UseVisualStyleBackColor = false;
             this.LeapMotion.Click += new System.EventHandler(this.button1_Click);
             // 
             // listView1
             // 
-            this.listView1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.listView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("listView1.BackgroundImage")));
-            this.listView1.BackgroundImageTiled = true;
+            this.listView1.BackColor = System.Drawing.Color.AliceBlue;
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Song,
@@ -91,7 +88,6 @@
             this.LoadFiles.Name = "LoadFiles";
             this.LoadFiles.Size = new System.Drawing.Size(194, 70);
             this.LoadFiles.TabIndex = 2;
-            this.LoadFiles.Text = "Load Files";
             this.LoadFiles.UseVisualStyleBackColor = true;
             this.LoadFiles.Click += new System.EventHandler(this.LoadFiles_Click);
             // 

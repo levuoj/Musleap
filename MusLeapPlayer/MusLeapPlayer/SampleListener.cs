@@ -13,7 +13,6 @@ namespace MusLeapPlayer
     {
         enum EState
         {
-            START,
             PLAY,
             PAUSE,
             NEXT,
@@ -24,13 +23,16 @@ namespace MusLeapPlayer
 
         private AxWMPLib.AxWindowsMediaPlayer _mediaPlayer;
         private ListView _list;
-        private EState state;
+        private EState _state;
+        private float  _height;
+        private bool _isStarted = false;
 
         public SampleListener(ref AxWMPLib.AxWindowsMediaPlayer media, ref ListView list)
         {
             EState state = EState.NONE;
             _mediaPlayer = media;
             _list = list;
+            _height = 0.0f;
         }
 
         public void OnServiceConnect(object sender, ConnectionEventArgs args)
@@ -54,7 +56,6 @@ namespace MusLeapPlayer
                 playlist.appendItem(media);
 
                 _mediaPlayer.currentPlaylist = playlist;
-                _mediaPlayer.Ctlcontrols.play();
             }
         }
 
@@ -80,21 +81,25 @@ namespace MusLeapPlayer
                     if (extendedfingers == 0)
                         pause = true;
 
-                    //if (hand.Fingers[0].IsExtended == false && hand.Fingers[1].IsExtended
-                    //    && hand.Fingers[2].IsExtended == false && hand.Fingers[3].IsExtended == false
-                    //    && hand.Fingers[4].IsExtended == false)
-                    //{
-                    //    Console.WriteLine("Volume sound");
-                    //    //valeur à envoyer pour gérer le son
-                    //    //hand.Fingers[1].StabilizedTipPosition.y
-                    //}
+                    if (hand.Fingers[0].IsExtended == false && hand.Fingers[1].IsExtended
+                        && hand.Fingers[2].IsExtended == false && hand.Fingers[3].IsExtended == false
+                        && hand.Fingers[4].IsExtended == false)
+                    {
+                        if (hand.Fingers[1].StabilizedTipPosition.y > _height)
+                            _mediaPlayer.settings.volume += 1;
+                        else
+                            _mediaPlayer.settings.volume -= 1;
+                        _height = hand.Fingers[1].StabilizedTipPosition.y;
+                    }
 
-                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9)
+                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9 && _state != EState.PREVIOUS)
+                    {
                         _mediaPlayer.Ctlcontrols.previous();
+                        _state = EState.PREVIOUS;
+                    }
 
-                    //if (hand.Rotation.w < 0.1)
-                    //    Console.WriteLine("mute");
-
+                    if(hand.Rotation.w < 0.1)
+                        _mediaPlayer.settings.volume = 100;
 
                     if (hand.Rotation.w < 0.70)
                         ++stop;
@@ -115,39 +120,48 @@ namespace MusLeapPlayer
                         && hand.Fingers[2].IsExtended == false && hand.Fingers[3].IsExtended == false
                         && hand.Fingers[4].IsExtended == false)
                     {
-                        Console.WriteLine("Volume sound");
-                        //valeur à envoyer pour gérer le son
-                        //hand.Fingers[1].StabilizedTipPosition.y
+                        if (hand.Fingers[1].StabilizedTipPosition.y > _height)
+                            _mediaPlayer.settings.volume += 1;
+                        else
+                            _mediaPlayer.settings.volume -= 1;
+                        _height = hand.Fingers[1].StabilizedTipPosition.y;
                     }
 
-                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9)
+                    if (hand.Rotation.w > 0.95 && hand.PinchStrength > 0.9 && _state != EState.NEXT)
+                    {
                         _mediaPlayer.Ctlcontrols.next();
+                        _state = EState.NEXT;
+                    }
+
                     if (hand.Rotation.w < 0.1)
                         _mediaPlayer.settings.volume = 0;
-
                     if (hand.Rotation.w < 0.70)
                         ++stop;
                 }
             }
             if (stop == 2)
             {
-                if (frame.Hands[0].PalmPosition.DistanceTo(frame.Hands[1].PalmPosition) < 20 && state != EState.STOP)
+                if (frame.Hands[0].PalmPosition.DistanceTo(frame.Hands[1].PalmPosition) < 20 && _state != EState.STOP)
                 {
                     _mediaPlayer.Ctlcontrols.stop();
-                    state = EState.STOP;
+                    _state = EState.STOP;
+                    _isStarted = false;
                 }
             }
             else
             {
-                if (pause == true && extendedfingers == 0 && state != EState.PAUSE)
+                if (pause == true && extendedfingers == 0 && _state != EState.PAUSE)
                 {
                     _mediaPlayer.Ctlcontrols.pause();
-                    state = EState.PAUSE;
+                    _state = EState.PAUSE;
                 }
-                else if (frame.Hands.Count == 2 && state != EState.PLAY)
+                else if (frame.Hands.Count == 2 && _state != EState.PLAY)
                 {
+                    if (_isStarted == false)
+                        playPlaylist();
                     _mediaPlayer.Ctlcontrols.play();
-                    state = EState.PLAY;
+                    _state = EState.PLAY;
+                    _isStarted = true;
                 }
             }
 
